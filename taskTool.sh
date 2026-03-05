@@ -78,3 +78,28 @@ marquer_terminee() {
     echo "Statut mis à jour pour la tâche $id_a_marquer."
 }
 
+afficher_taches() {
+    FICHIER="tasks.txt"
+
+    # 1. Vérifier si le fichier existe
+    if [ ! -f "$FICHIER" ]; then
+        echo "Erreur : Le fichier $FICHIER n'existe pas encore."
+        return # On arrête la fonction ici
+    fi
+
+    # 2. Afficher un en-tête lisible
+    echo "-----------------------------------------------------"
+    echo " ID  | TÂCHE                | STATUT "
+    echo "-----------------------------------------------------"
+
+    # 3. Parcourir et afficher chaque tâche
+    while IFS='|' read -r id description statut; do
+        # 4. Distinguer visuellement (0 = En cours, 1 = Terminé)
+        if [ "$statut" == "1" ]; then
+            echo " [$id] | $description | ✅ TERMINEE"
+        else
+            echo " [$id] | $description | ⏳ EN COURS"
+        fi
+    done < "$FICHIER"
+    echo "-----------------------------------------------------"
+}
