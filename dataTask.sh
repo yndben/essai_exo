@@ -16,3 +16,13 @@ afficher_toutes_taches() {
 	fi
 }
 
+sauvegarder_base() {
+	if [ -f "tasks.txt" ]; then 
+		cp tasks.txt tasks_backup.txt
+		echo "sauvegarde creees: tasks_backup.txt"
+	else 
+		echo "Erreur la base n'existe pas"
+	fi
+}
+
+
