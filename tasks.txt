@@ -1,0 +1,5 @@
+ID|Description|Statut
+
+1|faire les courses|0
+2|reviser le shell|1
+
