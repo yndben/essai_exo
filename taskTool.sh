@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#fonction 1
 ajouter_tache() {
 	#demander la description
 	read -p "entrez la description de la tache : " description
@@ -22,4 +22,30 @@ ajouter_tache() {
 
 
 }
+
+supprimer_tache() {
+	read -p "Entrer l'ID de la tache à supprimer : " id_a_supprimer
+
+	fichier_source="tasts.txt"
+	fichier_temp="task_temp.txt"
+
+	>"$fichier_temp"
+
+	while IFS= read -r ligne || [ -n "$ligne"]; do
+
+		current_id=$(echo"$ligne" | cut -d'|' -f1)
+
+		if [ "$current_id" != "$id_a_supprimrt" ]; then
+			echo "$ligne" >> $fichier_temp"
+
+		fi
+
+	done < "$fichier_source"
+
+	mv "$fichier_temp" "$fichier_source"
+
+	echo "la tache $id_a_supprimer a été supprimer avec succès."
+
+}
+
 
