@@ -49,3 +49,32 @@ supprimer_tache() {
 }
 
 
+marquer_terminee() {
+    # 1. Demander l'ID de la tâche
+    read -p "Entrez l'ID de la tâche terminée : " id_a_marquer
+
+   fichier_sourceE="tasks.txt"
+   fichier_temp=="tasks_temp.txt"
+    > "$fichier_temp"
+
+    # 2. Parcourir le fichier ligne par ligne
+    while IFS= read -r ligne || [ -n "$ligne" ]; do
+        # Extraire l'ID (champ 1)
+        current_id=$(echo "$ligne" | cut -d'|' -f1)
+
+        # 3. Si l'ID correspond, on remplace le statut (supposé être le dernier champ)
+        if [ "$current_id" == "$id_a_marquer" ]; then
+            # On utilise sed pour remplacer le 0 par 1 en fin de ligne
+            nouvelle_ligne=$(echo "$ligne" | sed 's/0$/1/')
+            echo "$nouvelle_ligne" >> "$fichier_temp"
+        else
+            # Sinon on recopie la ligne telle quelle
+            echo "$ligne" >> "$fichier_temp"
+        fi
+    done < "$fichier_source"
+
+    # 4. Réécrire le fichier
+    mv "$FICHIER_TEMP" "$FICHIER_SOURCE"
+    echo "Statut mis à jour pour la tâche $id_a_marquer."
+}
+
