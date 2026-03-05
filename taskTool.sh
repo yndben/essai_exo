@@ -6,7 +6,7 @@ ajouter_tache() {
 
 	#verifier si le fchier exixte, si non le créer
 
-	if [! -f tasks.txt]; then
+	if [ ! -f tasks.txt]; then
 		touch tasks.txt
 	fi
 
