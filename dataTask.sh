@@ -25,4 +25,11 @@ sauvegarder_base() {
 	fi
 }
 
-
+restaurer_base(){
+	if [ -f "tasks.txt" ]; then
+		cp tasks_baskup.txt tasks.txt 
+		echo "base restaurer depuis la sauvegarde"
+	else 
+		echo "Aucun sauvegarde disponible"
+	fi
+}
