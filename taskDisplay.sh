@@ -16,20 +16,32 @@ while true; do
     echo '7 - Restaurer la base' 
     echo '8 - Supprimer la base' 
     echo '0 - Quitter' 
-    echo '=========================' 
+    echo '========================='
+ 
     read -p 'Votre choix : ' choix
 
 
     
-if [ "$choix" = '1' ]; then 
-initialiser_base 
-elif [ "$choix" = '2' ]; then 
-ajouter_tache 
-# ... compléter avec les autres cas 
-elif [ "$choix" = '0' ]; then 
-echo 'Au revoir !' 
-break 
-else 
-echo 'Choix invalide.' 
-fi 
+	if [ "$choix" = '1' ]; then 
+		initialiser_base 
+	elif [ "$choix" = '2' ]; then 
+		ajouter_tache
+	elif [ "$choix" = '3' ]; then
+		supprimer_tache
+	elif [ "$choix" = "4" ]; then
+		marquer_terminee
+	elif [ "$choix" = "5" ]; then
+		afficher_toutes_taches
+	elif [ "$choix" = "6" ]; then
+		sauvegarder_base
+	elif [ "$choix" = "7" ]; then
+		restaurer_base
+	elif [ "$choix" = "8" ]; then
+		supprimer_base 
+	elif [ "$choix" = '0' ]; then 
+		echo 'Au revoir !' 
+		break 
+	else 
+		echo 'Choix invalide.' 
+	fi 
 done 
