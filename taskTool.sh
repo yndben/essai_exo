@@ -6,16 +6,16 @@ ajouter_tache() {
 
 	#verifier si le fchier exixte, si non le créer
 
-	if [ ! -f tasks.txt]; then
+	if [ ! -f tasks.txt ]; then
 		touch tasks.txt
 	fi
 
 	#pour généré un ID  automatiquemnet 
-	id=$(wc -l < tasks.sh)
+	id=$(wc -l < tasks.txt)
 	id=$((id +1))
 
 	# ajouter la tache avec statu 0
-	echo "$id|$description|0 >> tasks.txt
+	echo "$id|$description|0" >> tasks.txt
 
 	echo "tache ajouter avec ID $id"
 
@@ -26,17 +26,17 @@ ajouter_tache() {
 supprimer_tache() {
 	read -p "Entrer l'ID de la tache à supprimer : " id_a_supprimer
 
-	fichier_source="tasts.txt"
+	fichier_source="tasks.txt"
 	fichier_temp="task_temp.txt"
 
 	>"$fichier_temp"
 
-	while IFS= read -r ligne || [ -n "$ligne"]; do
+	while IFS= read -r ligne || [ -n "$ligne" ]; do
 
-		current_id=$(echo"$ligne" | cut -d'|' -f1)
+		current_id=$(echo "$ligne" | cut -d'|' -f1)
 
-		if [ "$current_id" != "$id_a_supprimrt" ]; then
-			echo "$ligne" >> $fichier_temp"
+		if [ "$current_id" != "$id_a_supprimer" ]; then
+			echo "$ligne" >> "$fichier_temp"
 
 		fi
 
@@ -53,8 +53,8 @@ marquer_terminee() {
     # 1. Demander l'ID de la tâche
     read -p "Entrez l'ID de la tâche terminée : " id_a_marquer
 
-   fichier_sourceE="tasks.txt"
-   fichier_temp=="tasks_temp.txt"
+   fichier_source="tasks.txt"
+   fichier_temp="tasks_temp.txt"
     > "$fichier_temp"
 
     # 2. Parcourir le fichier ligne par ligne
@@ -74,7 +74,7 @@ marquer_terminee() {
     done < "$fichier_source"
 
     # 4. Réécrire le fichier
-    mv "$FICHIER_TEMP" "$FICHIER_SOURCE"
+    mv "$fichier_temp" "$fichier_source"
     echo "Statut mis à jour pour la tâche $id_a_marquer."
 }
 
